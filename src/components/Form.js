@@ -3,7 +3,7 @@ import { calculateTotal } from '../helpers.js'
 
 
 const Form = (props) => {
-  const { quantity, setQuantity, term, setTerm, total, setTotal } = props;
+  const { quantity, setQuantity, term, setTerm, setTotal, setLoading } = props;
   const [error, setError] = useState(false)
 
 
@@ -22,9 +22,15 @@ const Form = (props) => {
       return;
     }
     setError(false);
-    const totalAmount = calculateTotal(quantity, term);
 
-    setTotal(totalAmount);
+    setLoading(true);
+
+    setTimeout(() => {
+      const totalAmount = calculateTotal(quantity, term);
+      setTotal(totalAmount);
+      setLoading(false)
+    }, 3000);
+
 
   }
 
