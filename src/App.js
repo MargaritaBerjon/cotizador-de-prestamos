@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Header from './components/Header.js'
 import Form from './components/Form.js'
+import Message from './components/Message.js'
+import Result from './components/Result.js'
 
 
 import './App.css';
@@ -10,6 +12,15 @@ function App() {
   const [term, setTerm] = useState(0);
   const [total, setTotal] = useState(0);
 
+  let component;
+  if (total === 0) {
+    component = <Message />
+  } else {
+    component = <Result
+      total={total}
+      term={term}
+      quantity={quantity} />
+  };
 
 
   return (
@@ -24,7 +35,9 @@ function App() {
           total={total}
           setTotal={setTotal}>
         </Form>
-        <p>Total a pagar: {total}€</p>
+        <div className='mensajes'>
+          {component}
+        </div>
       </div>
     </>
   );
